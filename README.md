@@ -66,8 +66,9 @@ ledger.csv ───────────────────────
 Needs Python 3.9 or newer.
 
 ```bash
-python -m venv .venv && source .venv/bin/activate
-pip install -e ".[dev]"
+python3 -m venv .venv && source .venv/bin/activate     # Windows: .venv\Scripts\activate
+python -m pip install --upgrade pip
+pip install -r requirements.txt       # or: pip install -e ".[dev]"
 
 python -m vouch.synth.generate --n 300 --seed 7 --out data/bench
 python -m vouch.evaluate --bench data/bench --extractor rules

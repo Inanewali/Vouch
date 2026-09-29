@@ -1,0 +1,8 @@
+# Plain install without building the package: pip install -r requirements.txt
+pydantic>=2.5
+eval_type_backport>=0.2; python_version < "3.10"
+pdfplumber>=0.11
+reportlab>=4.0
+rapidfuzz>=3.5
+anthropic>=0.40
+pytest>=7
