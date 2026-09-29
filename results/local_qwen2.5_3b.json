@@ -1,60 +1,115 @@
 {
- "extractor": "rules",
+ "extractor": "local:qwen2.5:3b",
  "bench": "data/bench",
  "documents": 20,
  "ledger_entries": 21,
- "run_at": "2026-09-29T17:30:55",
+ "run_at": "2026-09-29T17:36:36",
  "cost_usd_total": 0.0,
  "cost_usd_per_doc": 0.0,
- "seconds_per_doc": 0.01706773909999839,
+ "seconds_per_doc": 17.044492710500005,
  "extraction": {
   "field_accuracy": {
-   "vendor_name": 1.0,
+   "vendor_name": 0.7,
    "invoice_number": 1.0,
-   "invoice_date": 1.0,
+   "invoice_date": 0.8,
    "subtotal": 1.0,
    "tax": 1.0,
-   "total": 0.9,
+   "total": 0.95,
    "currency": 1.0
   },
-  "doc_all_fields_correct": 0.9,
+  "doc_all_fields_correct": 0.6,
   "errors": [
    {
+    "doc_id": "DOC0001",
+    "field": "vendor_name",
+    "pred": "None",
+    "true": "Bluefield Office Supply"
+   },
+   {
+    "doc_id": "DOC0003",
+    "field": "vendor_name",
+    "pred": "None",
+    "true": "Lakeside Janitorial"
+   },
+   {
+    "doc_id": "DOC0003",
+    "field": "invoice_date",
+    "pred": "None",
+    "true": "2025-09-14"
+   },
+   {
+    "doc_id": "DOC0006",
+    "field": "vendor_name",
+    "pred": "Maple Ridge Manufacturing Inc.",
+    "true": "Lakeside Janitorial"
+   },
+   {
+    "doc_id": "DOC0006",
+    "field": "invoice_date",
+    "pred": "None",
+    "true": "2025-04-24"
+   },
+   {
     "doc_id": "DOC0007",
-    "field": "total",
-    "pred": "15118.7",
-    "true": "9734.41"
+    "field": "vendor_name",
+    "pred": "None",
+    "true": "Summit Power & Gas"
+   },
+   {
+    "doc_id": "DOC0009",
+    "field": "invoice_date",
+    "pred": "None",
+    "true": "2025-02-24"
+   },
+   {
+    "doc_id": "DOC0010",
+    "field": "vendor_name",
+    "pred": "None",
+    "true": "Summit Power & Gas"
    },
    {
     "doc_id": "DOC0010",
     "field": "total",
     "pred": "85992.16",
     "true": "83047.86"
+   },
+   {
+    "doc_id": "DOC0016",
+    "field": "vendor_name",
+    "pred": "None",
+    "true": "HARBOR STEEL"
+   },
+   {
+    "doc_id": "DOC0018",
+    "field": "invoice_date",
+    "pred": "None",
+    "true": "2025-04-10"
    }
   ]
  },
  "matching": {
   "links": {
    "precision": 1.0,
-   "recall": 1.0,
-   "f1": 1.0,
-   "tp": 20,
+   "recall": 0.95,
+   "f1": 0.9743589743589743,
+   "tp": 19,
    "fp": 0,
-   "fn": 0,
-   "missed": [],
+   "fn": 1,
+   "missed": [
+    "DOC0016|JE00016"
+   ],
    "false_alarms": []
   },
   "exceptions": {
    "amount_mismatch": {
-    "precision": 0.3333333333333333,
+    "precision": 0.5,
     "recall": 1.0,
-    "f1": 0.5,
+    "f1": 0.6666666666666666,
     "tp": 1,
-    "fp": 2,
+    "fp": 1,
     "fn": 0,
     "missed": [],
     "false_alarms": [
-     "DOC0007|JE00007",
      "DOC0010|JE00010"
     ]
    },
@@ -79,37 +134,42 @@
     "false_alarms": []
    },
    "unsupported_entry": {
-    "precision": 1.0,
+    "precision": 0.5,
     "recall": 1.0,
-    "f1": 1.0,
+    "f1": 0.6666666666666666,
     "tp": 1,
-    "fp": 0,
+    "fp": 1,
     "fn": 0,
     "missed": [],
-    "false_alarms": []
+    "false_alarms": [
+     "JE00016"
+    ]
    },
    "unrecorded_invoice": {
-    "precision": 1.0,
+    "precision": 0.0,
     "recall": 1.0,
-    "f1": 1.0,
+    "f1": 0.0,
     "tp": 0,
-    "fp": 0,
+    "fp": 1,
     "fn": 0,
     "missed": [],
-    "false_alarms": []
+    "false_alarms": [
+     "DOC0016"
+    ]
    }
   },
   "exceptions_overall": {
-   "precision": 0.6,
+   "precision": 0.5,
    "recall": 1.0,
-   "f1": 0.7499999999999999,
+   "f1": 0.6666666666666666,
    "tp": 3,
-   "fp": 2,
+   "fp": 3,
    "fn": 0,
    "missed": [],
    "false_alarms": [
-    "amount_mismatch:DOC0007|JE00007",
-    "amount_mismatch:DOC0010|JE00010"
+    "amount_mismatch:DOC0010|JE00010",
+    "unrecorded_invoice:DOC0016",
+    "unsupported_entry:JE00016"
    ]
   }
  },
