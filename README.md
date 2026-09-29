@@ -26,8 +26,8 @@ matcher error.
 | Extractor | All fields correct | Link F1 | Exception precision | Exception recall | Oracle exception F1 | Cost / doc |
 |---|---|---|---|---|---|---|
 | rules (pdfplumber + regex) | 86.3% | 0.982 | 51.5% | 94.3% | 1.000 | $0 |
-| LLM (Claude, text mode) | *run it: see below* | | | | | |
-| LLM (Claude, PDF mode) | *run it: see below* | | | | | |
+| local model (Qwen2.5 3B via Ollama) | *running* | | | | | $0 |
+| LLM (Claude Haiku, text mode) | *run it: see below* | | | | | |
 
 **What the baseline gets wrong.** All 41 of its field errors are the same trap. On
 statement-style invoices it reads **Amount Due**, which includes a previous balance
@@ -40,7 +40,7 @@ balances, and the benchmark measures whether it actually does.
 
 ```
 invoice PDFs ──► extractor ──► InvoiceFields ──┐
-                (rules | LLM)   (pydantic)      ├──► matcher ──► links + exceptions ──► evaluation
+                (rules | local | API)   (pydantic)      ├──► matcher ──► links + exceptions ──► evaluation
 ledger.csv ─────────────────────────────────────┘   (scored,                           (vs labels.json)
                                                       explainable)
 ```
@@ -73,7 +73,11 @@ pip install -r requirements.txt       # or: pip install -e ".[dev]"
 python -m vouch.synth.generate --n 300 --seed 7 --out data/bench
 python -m vouch.evaluate --bench data/bench --extractor rules
 
-# LLM extractor (needs ANTHROPIC_API_KEY)
+# Local open-source model: free, and documents never leave the machine
+ollama pull qwen2.5:3b          # https://ollama.com
+python -m vouch.evaluate --bench data/bench --extractor local --model qwen2.5:3b
+
+# Claude API (needs ANTHROPIC_API_KEY)
 python -m vouch.evaluate --bench data/bench --extractor llm --model claude-haiku-4-5 --mode text
 python -m vouch.evaluate --bench data/bench --extractor llm --model claude-haiku-4-5 --mode pdf
 ```
@@ -84,8 +88,13 @@ model not listed in `vouch/extract/llm.py`, pass `--price-in` and `--price-out` 
 million tokens) to get costs.
 
 ```bash
-pytest -q        # 17 tests; the LLM path is tested with a fake client, no key needed
+pytest -q        # 19 tests; model calls are faked, so no key or Ollama needed
 ```
+
+**Without installing anything:** the repo's GitHub Actions can run the benchmarks for
+you. *local-model-benchmark* installs Ollama on GitHub's runner and is free; *llm-benchmark*
+calls the Claude API and needs a repository secret named `ANTHROPIC_API_KEY`. Both commit
+their results to `results/`.
 
 ## Data
 

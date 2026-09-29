@@ -12,6 +12,7 @@ from __future__ import annotations
 
 import json
 import os
+import re
 import time
 import urllib.request
 from pathlib import Path
@@ -39,16 +40,26 @@ SCHEMA = {
 }
 
 
-def _fields(data: dict) -> InvoiceFields:
+def _parse_date(raw: str, day_first: bool):
+    from datetime import datetime
+    raw = raw.strip().rstrip(".")
+    fmts = ["%Y-%m-%d", "%B %d, %Y", "%b %d, %Y", "%d %B %Y"]
+    fmts += ["%d/%m/%Y", "%m/%d/%Y"] if day_first else ["%m/%d/%Y", "%d/%m/%Y"]
+    for f in fmts:
+        try:
+            return datetime.strptime(raw[:len(raw)], f).date()
+        except ValueError:
+            continue
+    return None
+
+
+def _fields(data: dict, day_first: bool = False) -> InvoiceFields:
     """Validate, dropping any single field the model returned in an unusable form
-    rather than losing the whole document."""
-    from datetime import date
+    rather than losing the whole document. Small models often ignore the requested
+    date format, so dates are parsed using the document's own format hint."""
     d = data.get("invoice_date")
     if isinstance(d, str):
-        try:
-            data["invoice_date"] = date.fromisoformat(d.strip()[:10])
-        except ValueError:
-            data["invoice_date"] = None
+        data["invoice_date"] = _parse_date(d, day_first)
     for k in ("subtotal", "tax", "total"):
         v = data.get(k)
         if isinstance(v, str):
@@ -57,6 +68,13 @@ def _fields(data: dict) -> InvoiceFields:
             except ValueError:
                 data[k] = None
     return InvoiceFields.model_validate({k: data.get(k) for k in InvoiceFields.model_fields})
+
+
+LOCAL_HINTS = (
+    " The vendor is the business that ISSUED the invoice (its name is usually the largest "
+    "text, in the letterhead or the remit-to block), never the customer being billed. "
+    "Reply with JSON only. Write dates as YYYY-MM-DD."
+)
 
 
 class LocalExtractor:
@@ -84,13 +102,13 @@ class LocalExtractor:
             "format": SCHEMA,
             "options": {"temperature": 0, "num_ctx": 4096},
             "messages": [
-                {"role": "system", "content": SYSTEM + " Reply with JSON only. Dates as YYYY-MM-DD."},
+                {"role": "system", "content": SYSTEM + LOCAL_HINTS},
                 {"role": "user", "content": f"<invoice>\n{text}\n</invoice>\nExtract the invoice fields."},
             ],
         })
         data = json.loads(out["message"]["content"])
         conf = float(data.pop("confidence", 0.5) or 0.5)
-        fields = _fields(data)
+        fields = _fields(data, day_first=bool(re.search(r"(?i)dd/mm", text)))
         return Extraction(doc_id=doc_id, fields=fields, confidence=conf, cost_usd=0.0,
                           seconds=time.perf_counter() - t0)
 

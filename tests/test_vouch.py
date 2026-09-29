@@ -192,7 +192,10 @@ def test_local_extractor_with_fake_ollama(bench, monkeypatch):
     assert sent["format"]["required"] and sent["options"]["temperature"] == 0
 
 
-def test_local_extractor_drops_bad_date_not_whole_doc():
+def test_local_extractor_date_handling():
     from vouch.extract.local import _fields
-    f = _fields({"vendor_name": "A", "invoice_number": "1", "invoice_date": "04/03/2025", "total": 5})
-    assert f.invoice_date is None and f.total == 5.0
+    f = _fields({"vendor_name": "A", "invoice_number": "1", "invoice_date": "14/09/2025", "total": 5},
+                day_first=True)
+    assert f.invoice_date == date(2025, 9, 14) and f.total == 5.0
+    assert _fields({"invoice_date": "04/03/2025"}, day_first=True).invoice_date == date(2025, 3, 4)
+    assert _fields({"invoice_date": "not a date", "total": 7}).invoice_date is None
