@@ -1,0 +1,501 @@
+{
+ "extractor": "rules",
+ "bench": "data/bench",
+ "documents": 300,
+ "ledger_entries": 298,
+ "run_at": "2026-09-29T11:11:59",
+ "cost_usd_total": 0.0,
+ "cost_usd_per_doc": 0.0,
+ "seconds_per_doc": 0.013015472976672602,
+ "extraction": {
+  "field_accuracy": {
+   "vendor_name": 1.0,
+   "invoice_number": 1.0,
+   "invoice_date": 1.0,
+   "subtotal": 1.0,
+   "tax": 1.0,
+   "total": 0.8633333333333333,
+   "currency": 1.0
+  },
+  "doc_all_fields_correct": 0.8633333333333333,
+  "errors": [
+   {
+    "doc_id": "DOC0007",
+    "field": "total",
+    "pred": "15118.7",
+    "true": "9734.41"
+   },
+   {
+    "doc_id": "DOC0010",
+    "field": "total",
+    "pred": "85992.16",
+    "true": "83047.86"
+   },
+   {
+    "doc_id": "DOC0033",
+    "field": "total",
+    "pred": "7498.17",
+    "true": "6000.83"
+   },
+   {
+    "doc_id": "DOC0048",
+    "field": "total",
+    "pred": "9009.5",
+    "true": "237.25"
+   },
+   {
+    "doc_id": "DOC0057",
+    "field": "total",
+    "pred": "8469.44",
+    "true": "500.58"
+   },
+   {
+    "doc_id": "DOC0064",
+    "field": "total",
+    "pred": "2310.57",
+    "true": "1027.67"
+   },
+   {
+    "doc_id": "DOC0072",
+    "field": "total",
+    "pred": "24991.7",
+    "true": "16910.93"
+   },
+   {
+    "doc_id": "DOC0079",
+    "field": "total",
+    "pred": "3841.01",
+    "true": "2131.4"
+   },
+   {
+    "doc_id": "DOC0082",
+    "field": "total",
+    "pred": "91051.05",
+    "true": "89986.01"
+   },
+   {
+    "doc_id": "DOC0083",
+    "field": "total",
+    "pred": "47855.16",
+    "true": "43335.92"
+   },
+   {
+    "doc_id": "DOC0100",
+    "field": "total",
+    "pred": "3555.73",
+    "true": "1907.11"
+   },
+   {
+    "doc_id": "DOC0110",
+    "field": "total",
+    "pred": "2071.49",
+    "true": "406.55"
+   },
+   {
+    "doc_id": "DOC0114",
+    "field": "total",
+    "pred": "6099.32",
+    "true": "1181.18"
+   },
+   {
+    "doc_id": "DOC0127",
+    "field": "total",
+    "pred": "12559.03",
+    "true": "7403.51"
+   },
+   {
+    "doc_id": "DOC0130",
+    "field": "total",
+    "pred": "5302.4",
+    "true": "1011.76"
+   },
+   {
+    "doc_id": "DOC0136",
+    "field": "total",
+    "pred": "8444.47",
+    "true": "3421.81"
+   },
+   {
+    "doc_id": "DOC0137",
+    "field": "total",
+    "pred": "7670.26",
+    "true": "4963.84"
+   },
+   {
+    "doc_id": "DOC0139",
+    "field": "total",
+    "pred": "69824.05",
+    "true": "61151.92"
+   },
+   {
+    "doc_id": "DOC0146",
+    "field": "total",
+    "pred": "6303.02",
+    "true": "4602.31"
+   },
+   {
+    "doc_id": "DOC0150",
+    "field": "total",
+    "pred": "19159.65",
+    "true": "15550.85"
+   },
+   {
+    "doc_id": "DOC0154",
+    "field": "total",
+    "pred": "6739.91",
+    "true": "215.18"
+   },
+   {
+    "doc_id": "DOC0156",
+    "field": "total",
+    "pred": "7162.85",
+    "true": "1607.79"
+   },
+   {
+    "doc_id": "DOC0180",
+    "field": "total",
+    "pred": "7580.6",
+    "true": "1183.42"
+   },
+   {
+    "doc_id": "DOC0181",
+    "field": "total",
+    "pred": "3140.3",
+    "true": "279.09"
+   },
+   {
+    "doc_id": "DOC0192",
+    "field": "total",
+    "pred": "9345.67",
+    "true": "3137.26"
+   },
+   {
+    "doc_id": "DOC0195",
+    "field": "total",
+    "pred": "9358.21",
+    "true": "3012.08"
+   },
+   {
+    "doc_id": "DOC0214",
+    "field": "total",
+    "pred": "9592.05",
+    "true": "1800.9"
+   },
+   {
+    "doc_id": "DOC0217",
+    "field": "total",
+    "pred": "30206.7",
+    "true": "24367.81"
+   },
+   {
+    "doc_id": "DOC0221",
+    "field": "total",
+    "pred": "6774.69",
+    "true": "2057.08"
+   },
+   {
+    "doc_id": "DOC0230",
+    "field": "total",
+    "pred": "66874.42",
+    "true": "59776.61"
+   },
+   {
+    "doc_id": "DOC0233",
+    "field": "total",
+    "pred": "14513.8",
+    "true": "11511.06"
+   },
+   {
+    "doc_id": "DOC0240",
+    "field": "total",
+    "pred": "26515.44",
+    "true": "24520.46"
+   },
+   {
+    "doc_id": "DOC0250",
+    "field": "total",
+    "pred": "9258.23",
+    "true": "1160.99"
+   },
+   {
+    "doc_id": "DOC0262",
+    "field": "total",
+    "pred": "5249.67",
+    "true": "1040.18"
+   },
+   {
+    "doc_id": "DOC0271",
+    "field": "total",
+    "pred": "14496.76",
+    "true": "13315.8"
+   },
+   {
+    "doc_id": "DOC0275",
+    "field": "total",
+    "pred": "2769.43",
+    "true": "985.67"
+   },
+   {
+    "doc_id": "DOC0284",
+    "field": "total",
+    "pred": "126761.57",
+    "true": "123708.04"
+   },
+   {
+    "doc_id": "DOC0290",
+    "field": "total",
+    "pred": "38159.65",
+    "true": "37813.33"
+   },
+   {
+    "doc_id": "DOC0291",
+    "field": "total",
+    "pred": "6141.39",
+    "true": "815.44"
+   },
+   {
+    "doc_id": "DOC0293",
+    "field": "total",
+    "pred": "39645.1",
+    "true": "39013.24"
+   },
+   {
+    "doc_id": "DOC0294",
+    "field": "total",
+    "pred": "6603.08",
+    "true": "4180.19"
+   }
+  ]
+ },
+ "matching": {
+  "links": {
+   "precision": 1.0,
+   "recall": 0.9653979238754326,
+   "f1": 0.9823943661971831,
+   "tp": 279,
+   "fp": 0,
+   "fn": 10,
+   "missed": [
+    "DOC0033|JE00031",
+    "DOC0130|JE00125",
+    "DOC0136|JE00131",
+    "DOC0150|JE00144",
+    "DOC0154|JE00148",
+    "DOC0181|JE00175",
+    "DOC0192|JE00186",
+    "DOC0195|JE00188",
+    "DOC0195|JE00189",
+    "DOC0290|JE00279"
+   ],
+   "false_alarms": []
+  },
+  "exceptions": {
+   "amount_mismatch": {
+    "precision": 0.3170731707317073,
+    "recall": 1.0,
+    "f1": 0.48148148148148145,
+    "tp": 13,
+    "fp": 28,
+    "fn": 0,
+    "missed": [],
+    "false_alarms": [
+     "DOC0007|JE00007",
+     "DOC0010|JE00010",
+     "DOC0048|JE00047",
+     "DOC0057|JE00056",
+     "DOC0064|JE00063",
+     "DOC0079|JE00076",
+     "DOC0082|JE00078",
+     "DOC0083|JE00079",
+     "DOC0100|JE00096",
+     "DOC0110|JE00106",
+     "DOC0114|JE00110",
+     "DOC0137|JE00132",
+     "DOC0139|JE00134",
+     "DOC0146|JE00141",
+     "DOC0180|JE00174",
+     "DOC0214|JE00205",
+     "DOC0217|JE00208",
+     "DOC0221|JE00212",
+     "DOC0230|JE00221",
+     "DOC0233|JE00224"
+    ]
+   },
+   "period_mismatch": {
+    "precision": 1.0,
+    "recall": 0.8,
+    "f1": 0.888888888888889,
+    "tp": 8,
+    "fp": 0,
+    "fn": 2,
+    "missed": [
+     "DOC0033|JE00031",
+     "DOC0181|JE00175"
+    ],
+    "false_alarms": []
+   },
+   "duplicate_posting": {
+    "precision": 1.0,
+    "recall": 0.8,
+    "f1": 0.888888888888889,
+    "tp": 4,
+    "fp": 0,
+    "fn": 1,
+    "missed": [
+     "JE00189"
+    ],
+    "false_alarms": []
+   },
+   "unsupported_entry": {
+    "precision": 0.47368421052631576,
+    "recall": 1.0,
+    "f1": 0.6428571428571429,
+    "tp": 9,
+    "fp": 10,
+    "fn": 0,
+    "missed": [],
+    "false_alarms": [
+     "JE00031",
+     "JE00125",
+     "JE00131",
+     "JE00144",
+     "JE00148",
+     "JE00175",
+     "JE00186",
+     "JE00188",
+     "JE00189",
+     "JE00279"
+    ]
+   },
+   "unrecorded_invoice": {
+    "precision": 0.64,
+    "recall": 1.0,
+    "f1": 0.7804878048780487,
+    "tp": 16,
+    "fp": 9,
+    "fn": 0,
+    "missed": [],
+    "false_alarms": [
+     "DOC0033",
+     "DOC0130",
+     "DOC0136",
+     "DOC0150",
+     "DOC0154",
+     "DOC0181",
+     "DOC0192",
+     "DOC0195",
+     "DOC0290"
+    ]
+   }
+  },
+  "exceptions_overall": {
+   "precision": 0.5154639175257731,
+   "recall": 0.9433962264150944,
+   "f1": 0.6666666666666666,
+   "tp": 50,
+   "fp": 47,
+   "fn": 3,
+   "missed": [
+    "duplicate_posting:JE00189",
+    "period_mismatch:DOC0033|JE00031",
+    "period_mismatch:DOC0181|JE00175"
+   ],
+   "false_alarms": [
+    "amount_mismatch:DOC0007|JE00007",
+    "amount_mismatch:DOC0010|JE00010",
+    "amount_mismatch:DOC0048|JE00047",
+    "amount_mismatch:DOC0057|JE00056",
+    "amount_mismatch:DOC0064|JE00063",
+    "amount_mismatch:DOC0079|JE00076",
+    "amount_mismatch:DOC0082|JE00078",
+    "amount_mismatch:DOC0083|JE00079",
+    "amount_mismatch:DOC0100|JE00096",
+    "amount_mismatch:DOC0110|JE00106",
+    "amount_mismatch:DOC0114|JE00110",
+    "amount_mismatch:DOC0137|JE00132",
+    "amount_mismatch:DOC0139|JE00134",
+    "amount_mismatch:DOC0146|JE00141",
+    "amount_mismatch:DOC0180|JE00174",
+    "amount_mismatch:DOC0214|JE00205",
+    "amount_mismatch:DOC0217|JE00208",
+    "amount_mismatch:DOC0221|JE00212",
+    "amount_mismatch:DOC0230|JE00221",
+    "amount_mismatch:DOC0233|JE00224"
+   ]
+  }
+ },
+ "matching_oracle": {
+  "links": {
+   "precision": 1.0,
+   "recall": 1.0,
+   "f1": 1.0,
+   "tp": 289,
+   "fp": 0,
+   "fn": 0,
+   "missed": [],
+   "false_alarms": []
+  },
+  "exceptions": {
+   "amount_mismatch": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "tp": 13,
+    "fp": 0,
+    "fn": 0,
+    "missed": [],
+    "false_alarms": []
+   },
+   "period_mismatch": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "tp": 10,
+    "fp": 0,
+    "fn": 0,
+    "missed": [],
+    "false_alarms": []
+   },
+   "duplicate_posting": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "tp": 5,
+    "fp": 0,
+    "fn": 0,
+    "missed": [],
+    "false_alarms": []
+   },
+   "unsupported_entry": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "tp": 9,
+    "fp": 0,
+    "fn": 0,
+    "missed": [],
+    "false_alarms": []
+   },
+   "unrecorded_invoice": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "tp": 16,
+    "fp": 0,
+    "fn": 0,
+    "missed": [],
+    "false_alarms": []
+   }
+  },
+  "exceptions_overall": {
+   "precision": 1.0,
+   "recall": 1.0,
+   "f1": 1.0,
+   "tp": 53,
+   "fp": 0,
+   "fn": 0,
+   "missed": [],
+   "false_alarms": []
+  }
+ }
+}

@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+venv/
+*.egg-info/
+# generated benchmarks and cached API results (regenerate with the commands in the README)
+data/
+# never commit real client documents
+*.real.pdf
+.env
