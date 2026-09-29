@@ -168,3 +168,31 @@ def test_llm_pdf_mode_sends_document(bench):
                        "total": 1.0, "confidence": 0.4})
     LLMExtractor(mode="pdf", client=fake).extract("DOC0001", bench / "docs" / "DOC0001.pdf")
     assert fake.calls[0]["messages"][0]["content"][0]["type"] == "document"
+
+
+import json
+
+
+def test_local_extractor_with_fake_ollama(bench, monkeypatch):
+    from vouch.extract.local import LocalExtractor
+    sent = {}
+
+    def fake_post(self, body):
+        sent.update(body)
+        return {"message": {"content": json.dumps({
+            "vendor_name": "Harbor Steel Supply", "invoice_number": "HSS-01234",
+            "invoice_date": "2025-04-02", "subtotal": "1,000.00", "tax": 50, "total": 1050,
+            "currency": "CAD", "confidence": 0.9})}}
+
+    import json
+    monkeypatch.setattr(LocalExtractor, "_post", fake_post)
+    e = LocalExtractor(model="qwen2.5:3b").extract("DOC0001", bench / "docs" / "DOC0001.pdf")
+    assert e.fields.subtotal == 1000.0 and e.fields.total == 1050.0
+    assert e.fields.invoice_date == date(2025, 4, 2) and e.cost_usd == 0.0
+    assert sent["format"]["required"] and sent["options"]["temperature"] == 0
+
+
+def test_local_extractor_drops_bad_date_not_whole_doc():
+    from vouch.extract.local import _fields
+    f = _fields({"vendor_name": "A", "invoice_number": "1", "invoice_date": "04/03/2025", "total": 5})
+    assert f.invoice_date is None and f.total == 5.0

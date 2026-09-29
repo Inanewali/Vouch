@@ -1,0 +1,59 @@
+name: local-model-benchmark
+# Runs an open-source model with Ollama on GitHub's own runner: free, no API key.
+# Start it from the Actions tab (Run workflow), or push to a branch named bench/<anything>.
+on:
+  workflow_dispatch:
+    inputs:
+      model:
+        description: Ollama model tag
+        default: qwen2.5:3b
+      n:
+        description: Number of invoices
+        default: "300"
+  push:
+    branches: ["bench/**"]
+
+permissions:
+  contents: write
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    env:
+      MODEL: ${{ inputs.model || 'qwen2.5:3b' }}
+      N: ${{ inputs.n || (contains(github.ref_name, 'smoke') && '20' || '300') }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt
+      - name: Install Ollama and pull the model
+        run: |
+          curl -fsSL https://ollama.com/install.sh | sh
+          (ollama serve > ollama.log 2>&1 &)
+          for i in $(seq 1 30); do curl -sf localhost:11434/api/tags >/dev/null && break; sleep 2; done
+          ollama pull "$MODEL"
+      - name: Generate benchmark
+        run: python -m vouch.synth.generate --n "$N" --seed 7 --out data/bench
+      - name: Rules baseline
+        run: python -m vouch.evaluate --bench data/bench --extractor rules | tee -a "$GITHUB_STEP_SUMMARY"
+      - name: Local model
+        run: python -m vouch.evaluate --bench data/bench --extractor local --model "$MODEL" | tee -a "$GITHUB_STEP_SUMMARY"
+      - name: Commit results
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add results/ || true
+          git diff --cached --quiet && exit 0
+          git commit -m "Benchmark results: $MODEL on $N invoices"
+          git push origin "HEAD:${GITHUB_REF_NAME}"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: extractions-local
+          path: |
+            data/bench/extractions/
+            ollama.log

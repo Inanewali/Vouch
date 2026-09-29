@@ -29,7 +29,7 @@ def register(name: str):
 
 def get(name: str, **kwargs) -> Extractor:
     # import side-effect registrations
-    from vouch.extract import llm, rules  # noqa: F401
+    from vouch.extract import llm, local, rules  # noqa: F401
     if name not in REGISTRY:
         raise KeyError(f"Unknown extractor '{name}'. Available: {', '.join(sorted(REGISTRY))}")
     return REGISTRY[name](**kwargs)
