@@ -63,6 +63,8 @@ ledger.csv ───────────────────────
 
 ## Run it
 
+Needs Python 3.9 or newer.
+
 ```bash
 python -m venv .venv && source .venv/bin/activate
 pip install -e ".[dev]"
