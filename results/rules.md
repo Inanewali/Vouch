@@ -21,4 +21,4 @@
 | unrecorded invoice (n=16) | 64.0% | 100.0% | 0.780 | 1.000 |
 | **all exceptions** | **51.5%** | **94.3%** | **0.667** | 1.000 |
 
-Cost: $0.00000 per document · 13 ms per document
+Cost: $0.00000 per document · 17 ms per document
