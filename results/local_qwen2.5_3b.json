@@ -1,24 +1,30 @@
 {
- "extractor": "rules",
+ "extractor": "local:qwen2.5:3b",
  "bench": "data/bench",
  "documents": 20,
  "ledger_entries": 21,
- "run_at": "2026-09-29T17:40:01",
+ "run_at": "2026-09-29T17:44:34",
  "cost_usd_total": 0.0,
  "cost_usd_per_doc": 0.0,
- "seconds_per_doc": 0.010577309350003361,
+ "seconds_per_doc": 13.638084293699999,
  "extraction": {
   "field_accuracy": {
    "vendor_name": 1.0,
-   "invoice_number": 1.0,
+   "invoice_number": 0.95,
    "invoice_date": 1.0,
    "subtotal": 1.0,
    "tax": 1.0,
    "total": 0.9,
    "currency": 1.0
   },
-  "doc_all_fields_correct": 0.9,
+  "doc_all_fields_correct": 0.85,
   "errors": [
+   {
+    "doc_id": "DOC0005",
+    "field": "invoice_number",
+    "pred": "None",
+    "true": "RB/08930"
+   },
    {
     "doc_id": "DOC0007",
     "field": "total",
